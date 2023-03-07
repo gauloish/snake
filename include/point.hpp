@@ -2,6 +2,7 @@
 #ifndef POINT_HPP
 #define POINT_HPP
 
+namespace point {
 class Point {
    private:
     int x;
@@ -13,5 +14,6 @@ class Point {
     void set(int x, int y);
     int get(char value);
 };
+}  // namespace point
 
 #endif
