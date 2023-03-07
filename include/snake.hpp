@@ -7,7 +7,6 @@ namespace snake {
 /**
  * @class Block
  * @brief A part of snake, a block of it
- *
  */
 class Block {
    private:
@@ -23,6 +22,25 @@ class Block {
     void draw(double);
     void move(double, double);
 };
+
+/**
+ * @class Snake
+ * @brief A set of blocks forming a snake
+ */
+template <const unsigned amount>
+class Snake {
+   private:
+    Block blocks[amount];
+
+   public:
+    Snake(void);
+    Snake(double, double);
+    Snake(double, double, double);
+
+    void draw(double);
+    void move(double, double, bool);
+};
+
 }  // namespace snake
 
 #endif
