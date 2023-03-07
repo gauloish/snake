@@ -5,14 +5,14 @@
 namespace point {
 class Point {
    private:
-    int x;
-    int y;
+    double x;
+    double y;
 
    public:
-    Point(int, int);
+    Point(double, double);
 
-    void set(int, int);
-    int get(char);
+    void set(double, double);
+    double get(char);
 };
 }  // namespace point
 
