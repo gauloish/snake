@@ -1,7 +1,7 @@
 #include "../include/point.hpp"
 
 namespace point {
-Point::Point() {
+Point::Point(void) {
     this->x = 0;
     this->y = 0;
 }
