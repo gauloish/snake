@@ -9,10 +9,10 @@ class Point {
     int y;
 
    public:
-    Point(int x, int y);
+    Point(int, int);
 
-    void set(int x, int y);
-    int get(char value);
+    void set(int, int);
+    int get(char);
 };
 }  // namespace point
 
