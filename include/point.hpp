@@ -3,6 +3,11 @@
 #define POINT_HPP
 
 namespace point {
+/**
+ * @class Point
+ * @brief Emulate Points in Plane
+ *
+ */
 class Point {
    private:
     double x;
