@@ -1,18 +1,18 @@
 #include "../include/point.hpp"
 
 namespace point {
-Point::Point(int x, int y) {
+Point::Point(double x, double y) {
     this->x = x;
     this->y = y;
 }
 
-void Point::set(int x, int y) {
+void Point::set(double x, double y) {
     this->x = x;
     this->y = y;
 }
 
-int Point::get(char coordinate) {
-    int value = 0;
+double Point::get(char coordinate) {
+    double value = 0;
 
     if (coordinate == 'x') {
         value = this->x;
