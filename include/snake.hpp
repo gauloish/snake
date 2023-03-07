@@ -19,8 +19,10 @@ class Block {
     Block(double, double);
     Block(double, double, double);
 
+    double get(char);
     void draw(double);
     void move(double, double);
+    void shift(double, double);
 };
 
 /**
@@ -32,13 +34,16 @@ class Snake {
    private:
     Block blocks[amount];
 
+    unsigned size{1};
+
    public:
     Snake(void);
     Snake(double, double);
     Snake(double, double, double);
 
     void draw(double);
-    void move(double, double, bool);
+    void move(double, int, int);
+    void shift(void);
 };
 
 }  // namespace snake
