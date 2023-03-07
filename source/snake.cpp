@@ -62,8 +62,43 @@ void Block::draw(double size) {
  * @param x Horizontal position
  * @param y Vertical position
  */
-void Block::move(double x, double y) {
-    this->position.set(x, y);
-    //
+void Block::move(double x, double y) { this->position.set(x, y); }
+
+/**
+ * @brief Initalize snake with default position and color
+ */
+template <const unsigned amount>
+Snake<amount>::Snake(void) {
+    for (int index = 0; index < amount; index++) {
+        this->blocks[index] = Block();
+    }
 }
+
+/**
+ * @brief Initialize the snake with given position and default color
+ *
+ * @param x Initial horizontal position
+ * @param y Initial vertical position
+ */
+template <const unsigned amount>
+Snake<amount>::Snake(double x, double y) {
+    for (int index = 0; index < amount; index++) {
+        this->blocks[index] = Block(x, y);
+    }
+}
+
+/**
+ * @brief Initialize the snake with given position and color
+ *
+ * @param x Initial horizontal position
+ * @param y Initial vertical position
+ * @param color Snake color
+ */
+template <const unsigned amount>
+Snake<amount>::Snake(double x, double y, double color) {
+    for (int index = 0; index < amount; index++) {
+        this->blocks[index] = Block(x, y, color);
+    }
+}
+
 }  // namespace snake
