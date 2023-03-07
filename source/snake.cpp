@@ -55,4 +55,15 @@ void Block::draw(double size) {
     glVertex2d(x, y - size);
     glEnd();
 }
+
+/**
+ * @brief Move block to other position
+ *
+ * @param x Horizontal position
+ * @param y Vertical position
+ */
+void Block::move(double x, double y) {
+    this->position.set(x, y);
+    //
+}
 }  // namespace snake
