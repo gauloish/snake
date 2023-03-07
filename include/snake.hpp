@@ -20,7 +20,7 @@ class Block {
     Block(double, double);
     Block(double, double, double);
 
-    void draw(void);
+    void draw(double);
     void move(void);
 };
 }  // namespace snake
