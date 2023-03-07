@@ -34,4 +34,25 @@ Block::Block(double x, double y, double color) {
     this->position = point::Point(x, y);
     this->color = color;
 }
+
+/**
+ * @brief Draw a block in scene
+ *
+ * @param size Size of side block
+ */
+void Block::draw(double size) {
+    size = 2.0 / size;
+
+    double x = this->position.get('x');
+    double y = this->position.get('y');
+
+    glColor3d(this->color, this->color, this->color);
+
+    glBegin(GL_POLYGON);
+    glVertex2d(x, y);
+    glVertex2d(x + size, y);
+    glVertex2d(x + size, y - size);
+    glVertex2d(x, y - size);
+    glEnd();
+}
 }  // namespace snake
