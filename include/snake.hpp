@@ -21,7 +21,7 @@ class Block {
     Block(double, double, double);
 
     void draw(double);
-    void move(void);
+    void move(double, double);
 };
 }  // namespace snake
 
