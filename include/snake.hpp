@@ -16,6 +16,12 @@ class Block {
     double color;
 
    public:
+    Block(void);
+    Block(double, double);
+    Block(double, double, double);
+
+    void draw(void);
+    void move(void);
 };
 }  // namespace snake
 
