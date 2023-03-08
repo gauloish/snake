@@ -1,8 +1,8 @@
 #include "../include/settings.hpp"
 
 namespace windows {
-int unit = 25;
-int size = unit * unit;
+const unsigned unit = 25;
+const unsigned size = unit * unit;
 
 int width = size;
 int height = size;
