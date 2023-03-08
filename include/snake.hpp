@@ -1,3 +1,5 @@
+#include <vector>
+
 #include "point.hpp"
 
 #ifndef SNAKE_HPP
@@ -29,17 +31,17 @@ class Block {
  * @class Snake
  * @brief A set of blocks forming a snake
  */
-template <const unsigned amount>
 class Snake {
    private:
-    Block blocks[amount];
+    std::vector<Block> blocks;
 
+    const unsigned amount;
     unsigned size{1};
 
    public:
-    Snake(void);
-    Snake(double, double);
-    Snake(double, double, double);
+    Snake(const unsigned);
+    Snake(double, double, const unsigned);
+    Snake(double, double, double, const unsigned);
 
     void draw(double);
     void move(double, int, int);
