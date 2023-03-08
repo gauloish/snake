@@ -2,6 +2,6 @@
 #ifndef SETTINGS_HPP
 #define SETTINGS_HPP
 
-namespace windows {}  // namespace windows
+namespace settings {}  // namespace settings
 
 #endif
