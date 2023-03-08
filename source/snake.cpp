@@ -151,7 +151,7 @@ void Snake::draw(double size) {
  * @param horizontal Sense in horizontal
  * @param vertical Sense in vertical
  */
-void Snake::move(double size, int horizontal, int vertical) {
+void Snake::move(double size) {
     size = 2.0 / size;
 
     for (int index = 1; index < this->size; index++) {
@@ -161,7 +161,18 @@ void Snake::move(double size, int horizontal, int vertical) {
         this->blocks[index].move(x, y);
     }
 
-    this->blocks[0].shift(size * horizontal, size * vertical);
+    this->blocks[0].shift(size * this->horizontal, size * this->vertical);
+}
+
+/**
+ * @brief Change the snake movement sense
+ *
+ * @param horizontal Horizontal sense
+ * @param vertical Vertical sense
+ */
+void Snake::sense(int horizontal, int vertical) {
+    this->horizontal = horizontal;
+    this->vertical = vertical;
 }
 
 /**
