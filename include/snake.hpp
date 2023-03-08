@@ -38,13 +38,17 @@ class Snake {
     const unsigned amount;
     unsigned size{1};
 
+    int horizontal{0};
+    int vertical{0};
+
    public:
     Snake(const unsigned);
     Snake(double, double, const unsigned);
     Snake(double, double, double, const unsigned);
 
     void draw(double);
-    void move(double, int, int);
+    void move(double);
+    void sense(int, int);
     void shift(void);
 };
 
