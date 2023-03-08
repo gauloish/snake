@@ -1,6 +1,7 @@
 #include <GL/gl.h>
 
 #include <algorithm>
+#include <vector>
 
 #include "../include/point.hpp"
 #include "../include/snake.hpp"
@@ -90,11 +91,12 @@ void Block::shift(double x, double y) {
 /**
  * @brief Initalize snake with default position and color
  *
- * @tparam amount Size of snake
+ * @param amount Size of snake
  */
-template <const unsigned amount>
-Snake<amount>::Snake(void) {
-    for (int index = 0; index < amount; index++) {
+Snake::Snake(const unsigned amount) : amount(amount) {
+    this->blocks = std::vector<Block>(this->amount);
+
+    for (int index = 0; index < this->amount; index++) {
         this->blocks[index] = Block();
     }
 }
@@ -102,12 +104,13 @@ Snake<amount>::Snake(void) {
 /**
  * @brief Initialize the snake with given position and default color
  *
- * @tparam amount Size of snake
  * @param x Initial horizontal position
  * @param y Initial vertical position
+ * @param amount Size of snake
  */
-template <const unsigned amount>
-Snake<amount>::Snake(double x, double y) {
+Snake::Snake(double x, double y, const unsigned amount) : amount(amount) {
+    this->blocks = std::vector<Block>(this->amount);
+
     for (int index = 0; index < amount; index++) {
         this->blocks[index] = Block(x, y);
     }
@@ -116,13 +119,15 @@ Snake<amount>::Snake(double x, double y) {
 /**
  * @brief Initialize the snake with given position and color
  *
- * @tparam amount Size of snake
  * @param x Initial horizontal position
  * @param y Initial vertical position
  * @param color Snake color
+ * @param amount Size of snake
  */
-template <const unsigned amount>
-Snake<amount>::Snake(double x, double y, double color) {
+Snake::Snake(double x, double y, double color, const unsigned amount)
+    : amount(amount) {
+    this->blocks = std::vector<Block>(this->amount);
+
     for (int index = 0; index < amount; index++) {
         this->blocks[index] = Block(x, y, color);
     }
@@ -131,11 +136,9 @@ Snake<amount>::Snake(double x, double y, double color) {
 /**
  * @brief Draw the snake
  *
- * @tparam amount Size of snake
  * @param size Size of side block
  */
-template <const unsigned amount>
-void Snake<amount>::draw(double size) {
+void Snake::draw(double size) {
     for (int index = 0; index < this->size; index++) {
         this->blocks[index].draw(size);
     }
@@ -144,13 +147,11 @@ void Snake<amount>::draw(double size) {
 /**
  * @brief Move the snake
  *
- * @tparam amount Size of snake
  * @param size Size of side block
- * @param hor Sense in horizontal
- * @param ver Sense in vertical
+ * @param horizontal Sense in horizontal
+ * @param vertical Sense in vertical
  */
-template <const unsigned amount>
-void Snake<amount>::move(double size, int hor, int ver) {
+void Snake::move(double size, int horizontal, int vertical) {
     size = 2.0 / size;
 
     for (int index = 1; index < this->size; index++) {
@@ -160,15 +161,15 @@ void Snake<amount>::move(double size, int hor, int ver) {
         this->blocks[index].move(x, y);
     }
 
-    this->blocks[0].shift(size * hor, size * ver);
+    this->blocks[0].shift(size * horizontal, size * vertical);
 }
 
 /**
  * @brief Added one more block to snake
  */
-template <const unsigned amount>
-void Snake<amount>::shift(void) {
-    this->size = std::min(amount, this->size + 1);
+void Snake::shift(void) {
+    //
+    this->size = std::min(this->amount, this->size + 1);
 }
 
 }  // namespace snake
