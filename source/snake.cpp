@@ -1,5 +1,3 @@
-#include <GL/gl.h>
-
 #include <algorithm>
 #include <vector>
 
