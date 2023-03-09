@@ -4,7 +4,7 @@
 #include <iostream>
 
 #include "../include/functions.hpp"
-#include "../include/point.hpp"
+#include "../include/geometry.hpp"
 #include "../include/settings.hpp"
 #include "../include/snake.hpp"
 
