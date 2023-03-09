@@ -10,10 +10,23 @@
 
 namespace functions {
 void update(GLFWwindow *window, snake::Snake &snake) {
-    int state = glfwGetKey(window, GLFW_KEY_ENTER);
+    int keys[4][3] = {
+        {GLFW_KEY_LEFT, GLFW_KEY_H, GLFW_KEY_A},   // Left
+        {GLFW_KEY_RIGHT, GLFW_KEY_L, GLFW_KEY_D},  // Right
+        {GLFW_KEY_DOWN, GLFW_KEY_J, GLFW_KEY_S},   // Down
+        {GLFW_KEY_UP, GLFW_KEY_K, GLFW_KEY_W},     // Right
+    };
 
-    if (state == GLFW_PRESS) {
-        std::cout << "space!\n";
+    int senses[4][2] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+
+    for (int sense = 0; sense < 4; sense++) {
+        for (int key = 0; key < 3; key++) {
+            int state = glfwGetKey(window, keys[sense][key]);
+
+            if (state == GLFW_PRESS) {
+                snake.sense(senses[sense][0], senses[sense][1]);
+            }
+        }
     }
 }
 
