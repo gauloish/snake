@@ -1,7 +1,7 @@
 #ifndef POINT_HPP
 #define POINT_HPP
 
-namespace point {
+namespace geometry {
 /**
  * @class Point
  * @brief Emulate Points in Plane
@@ -16,9 +16,30 @@ class Point {
     Point(void);
     Point(double, double);
 
-    void set(double, double);
     double get(char);
+    void set(double, double);
 };
-}  // namespace point
+/**
+ * @class Block
+ * @brief A part of snake, a block of it
+ */
+class Block {
+   private:
+    Point position;
+
+    double color;
+
+   public:
+    Block(void);
+    Block(double, double);
+    Block(double, double, double);
+
+    double get(char);
+    void set(double, double);
+    void draw(double);
+    void move(double, double);
+};
+
+}  // namespace geometry
 
 #endif
