@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <vector>
 
-#include "../include/point.hpp"
+#include "../include/geometry.hpp"
 #include "../include/snake.hpp"
 
 namespace snake {
