@@ -14,8 +14,8 @@ class Snake {
    private:
     std::vector<geometry::Block> blocks;
 
-    const unsigned amount;
     unsigned size{1};
+    const unsigned amount;
 
     int horizontal{0};
     int vertical{0};
