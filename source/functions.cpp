@@ -1,3 +1,5 @@
+#define GLEW_STATIC
+
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
@@ -9,6 +11,12 @@
 #include "../include/snake.hpp"
 
 namespace functions {
+/**
+ * @brief Update the global states of objects and capture events
+ *
+ * @param window Windows where be running the stuffs
+ * @param snake The snake object
+ */
 void update(GLFWwindow *window, snake::Snake &snake) {
     int keys[4][3] = {
         {GLFW_KEY_LEFT, GLFW_KEY_H, GLFW_KEY_A},   // Left
@@ -30,6 +38,12 @@ void update(GLFWwindow *window, snake::Snake &snake) {
     }
 }
 
+/**
+ * @brief Render the game scene and your all stuffs
+ *
+ * @param window Window where will be rendered stuffs
+ * @param snake The snake object
+ */
 void render(GLFWwindow *window, snake::Snake &snake) {
     // do something
 
@@ -37,6 +51,9 @@ void render(GLFWwindow *window, snake::Snake &snake) {
     glfwPollEvents();
 }
 
+/**
+ * @brief Run the game
+ */
 void run(void) {
     if (not glfwInit()) {
         std::cerr << "Error: GLFW did not initialized!";
@@ -56,6 +73,30 @@ void run(void) {
     }
 
     glfwMakeContextCurrent(window);
+
+    GLenum status = glewInit();
+
+#ifdef GLEW_ERROR_NO_GLX_DISPLAY
+    if (status != GLEW_OK && status != GLEW_ERROR_NO_GLX_DISPLAY)
+#else
+    if (status != GLEW_OK)
+#endif
+    {
+        std::cerr << "Error: " << glewGetErrorString(status) << "\n";
+
+        glfwTerminate();
+
+        return;
+    }
+
+    std::cout << "Status: Using OpenGL " << glGetString(GL_VERSION) << "\n";
+    std::cout << "Status: Using GLEW   " << glewGetString(GLEW_VERSION) << "\n";
+    std::cout << "Status: Using GLFW   " << glfwGetVersionString() << "\n";
+
+    GLuint buffer;
+    glGenBuffers(1, &buffer);
+
+    std::cout << "Buffer: " << buffer << "\n";
 
     while (not glfwWindowShouldClose(window)) {
         snake::Snake snake = snake::Snake(settings::size);
