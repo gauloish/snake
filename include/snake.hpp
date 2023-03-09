@@ -12,7 +12,7 @@ namespace snake {
  */
 class Snake {
    private:
-    std::vector<Block> blocks;
+    std::vector<geometry::Block> blocks;
 
     const unsigned amount;
     unsigned size{1};
