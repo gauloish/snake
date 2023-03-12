@@ -3,6 +3,22 @@
 
 namespace geometry {
 /**
+ * @class Vertex
+ * @brief Emulate a vertex with position and color
+ *
+ */
+struct Vertex {
+    double position[3];
+    double color[3];
+
+    Vertex(void);
+    Vertex(double[3], double[3]);
+
+    double get(char);
+    void set(double[3], double[3]);
+};
+
+/**
  * @class Point
  * @brief Emulate Points in Plane
  *
