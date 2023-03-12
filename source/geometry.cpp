@@ -3,6 +3,19 @@
 #include "../include/geometry.hpp"
 
 namespace geometry {
+Vertex::Vertex(void) {
+    for (int index = 0; index < 3; index++) {
+        this->position[index] = 0;
+        this->color[index] = 0;
+    }
+}
+
+Vertex::Vertex(double position[3], double color[3]) {
+    for (int index = 0; index < 3; index++) {
+        this->position[index] = position[index];
+        this->color[index] = color[index];
+    }
+}
 /**
  * @brief Initialize a null point
  */
