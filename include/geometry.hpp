@@ -14,6 +14,19 @@ struct Vertex {
     double r, g, b;
 };
 
+/**
+ * @class Block
+ * @brief Emulate a block with vertices
+ *
+ */
+struct Block {
+    Vertex vertices[4];
+
+    Block(double, double, double, double);
+
+    void set(double, double, double, double);
+};
+
 }  // namespace geometry
 
 #endif
