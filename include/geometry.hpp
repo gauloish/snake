@@ -1,3 +1,5 @@
+#include <vector>
+
 #ifndef POINT_HPP
 #define POINT_HPP
 
@@ -13,49 +15,19 @@ struct Vertex {
 
     Vertex(void);
     Vertex(double[3], double[3]);
-
-    double get(char);
-    void set(double[3], double[3]);
 };
 
 /**
- * @class Point
- * @brief Emulate Points in Plane
+ * @class Polygon
+ * @brief A
  *
  */
-class Point {
-   private:
-    double x;
-    double y;
+struct Polygon {
+    std::vector<Vertex> vertices;
 
-   public:
-    Point(void);
-    Point(double, double);
-
-    double get(char);
-    void set(double, double);
+    Polygon(void);
+    Polygon(std::vector<Vertex>);
 };
-/**
- * @class Block
- * @brief A part of snake, a block of it
- */
-class Block {
-   private:
-    Point position;
-
-    double color;
-
-   public:
-    Block(void);
-    Block(double, double);
-    Block(double, double, double);
-
-    double get(char);
-    void set(double, double);
-    void draw(double);
-    void move(double, double);
-};
-
 }  // namespace geometry
 
 #endif
