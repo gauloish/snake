@@ -21,15 +21,13 @@ class Object {
 
     int state;
     int length;
-    int position;
-    int color;
 
    public:
     Object(std::vector<double>);
     ~Object(void);
 
     void setup(void);
-    void draw(void);
+    void draw(double, double);
 };
 }  // namespace render
 
