@@ -23,24 +23,23 @@ void Object::setup(void) {
     const char *vertexSource = R"glsl(
 		#version 330 core
 
-		layout (location = 0) in vec2 initial;
-		uniform vec2 position;
+		layout (location = 0) in vec3 position;
 
 		void main()
 		{
-			gl_Position = vec4(initial, 0.0, 0.1) + vec4(position, 0.0, 1.0);
+			gl_Position = vec4(position, 1.0);
 		}
 	)glsl";
 
     const char *fragmentSource = R"glsl(
 		#version 330 core
 
-		uniform vec4 color;
+		layout (location = 0) in vec3 color;
 		out vec4 outColor;
 
 		void main()
 		{
-			outColor = vec4(1.0, 1.0, 1.0, 1.0);
+			outColor = vec4(color, 1.0);
 		}
 	)glsl";
 
@@ -75,9 +74,6 @@ void Object::setup(void) {
     glLinkProgram(this->program);
     glUseProgram(this->program);
 
-    this->position = glGetUniformLocation(this->program, "position");
-    this->color = glGetUniformLocation(this->program, "color");
-
     // Vertex Data and Attributes
     glGenVertexArrays(1, &this->array);
     glBindVertexArray(this->array);
@@ -95,7 +91,7 @@ void Object::setup(void) {
     glBindVertexArray(0);
 }
 
-void Object::draw(void) {
+void Object::draw(double x, double y) {
     glUseProgram(program);
     glBindVertexArray(array);
     glDrawArrays(GL_TRIANGLES, 0, int(this->length / 2));
