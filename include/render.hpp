@@ -25,6 +25,7 @@ class Object {
    public:
     Object(void);
     Object(double, double, double, double);
+    ~Object(void);
 
     void set(double, double, double, double);
     void configure(void);
