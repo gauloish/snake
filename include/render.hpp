@@ -3,7 +3,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#include <vector>
+#include "../include/geometry.hpp"
 
 #ifndef RENDER_HPP
 #define RENDER_HPP
@@ -11,7 +11,8 @@
 namespace render {
 class Object {
    private:
-    double *points;
+    geometry::Block square;
+    double data[24];
 
     unsigned int array;
     unsigned int buffer;
@@ -20,13 +21,13 @@ class Object {
     unsigned int program;
 
     int state;
-    int length;
 
    public:
-    Object(std::vector<double>);
-    ~Object(void);
+    Object(void);
+    Object(double, double, double, double);
 
-    void setup(void);
+    void set(double, double, double, double);
+    void configure(void);
     void draw(double, double);
 };
 }  // namespace render
