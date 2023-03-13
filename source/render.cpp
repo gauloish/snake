@@ -4,22 +4,32 @@
 #include <GLFW/glfw3.h>
 
 #include <iostream>
-#include <vector>
 
+#include "../include/geometry.hpp"
 #include "../include/render.hpp"
 
 namespace render {
-Object::Object(std::vector<double> points) {
-    this->length = points.size();
+Object::Object(void) : Object::Object(0.0, 0.0, 0.0, 0.0) {}
 
-    this->points = new double[this->length];
+Object::Object(double x, double y, double step, double color) {
+    this->set(x, y, step, color);
+    this->configure();
+}
 
-    for (int index = 0; index < this->length; index++) {
-        this->points[index] = points[index];
+void Object::set(double x, double y, double step, double color) {
+    this->square = geometry::Block(x, y, step, color);
+
+    for (int index = 0; index < 4; index++) {
+        this->data[6 * index + 0] = this->square.vertices[index].x;
+        this->data[6 * index + 1] = this->square.vertices[index].y;
+        this->data[6 * index + 2] = this->square.vertices[index].z;
+        this->data[6 * index + 3] = this->square.vertices[index].r;
+        this->data[6 * index + 4] = this->square.vertices[index].g;
+        this->data[6 * index + 5] = this->square.vertices[index].b;
     }
 }
 
-void Object::setup(void) {
+void Object::configure(void) {
     const char *vertexSource = R"glsl(
 		#version 330 core
 
