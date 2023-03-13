@@ -22,6 +22,7 @@ struct Vertex {
 struct Block {
     Vertex vertices[4];
 
+    Block(void);
     Block(double, double, double, double);
 
     void set(double, double, double, double);
