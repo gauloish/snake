@@ -109,8 +109,6 @@ void Object::draw(double x, double y) {
 }
 
 Object::~Object(void) {
-    delete[] this->points;
-
     glDeleteShader(vertex);
     glDeleteShader(fragment);
 
