@@ -27,7 +27,6 @@ struct Block {
 
     void set(double, double, double, double);
 };
-
 }  // namespace geometry
 
 #endif
