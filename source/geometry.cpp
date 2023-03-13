@@ -3,131 +3,40 @@
 #include "../include/geometry.hpp"
 
 namespace geometry {
+/**
+ * @brief Initialize a vertex values to default values
+ */
 Vertex::Vertex(void) {
-    for (int index = 0; index < 3; index++) {
-        this->position[index] = 0;
-        this->color[index] = 0;
+    for (int index = 0; index < 4; index++) {
+        this->position[index] = 0.0;
+        this->color[index] = 1.0;
     }
 }
 
-Vertex::Vertex(double position[3], double color[3]) {
-    for (int index = 0; index < 3; index++) {
+/**
+ * @brief Initialize a vertex with given values
+ *
+ * @param position Vertex position in space
+ * @param color Color position
+ */
+Vertex::Vertex(double position[4], double color[4]) {
+    for (int index = 0; index < 4; index++) {
         this->position[index] = position[index];
         this->color[index] = color[index];
     }
 }
-/**
- * @brief Initialize a null point
- */
-Point::Point(void) { this->set(0, 0); }
 
 /**
- * @brief Initialize a point with passed coordinates
+ * @brief Set the vertex attribute values
  *
- * @param x Abscissa (Horizontal)
- * @param y Ordinate (Vertical)
+ * @param position Position values
+ * @param color Color values
  */
-Point::Point(double x, double y) { this->set(x, y); }
-
-/**
- * @brief Set point coordinates
- *
- * @param x Abscissa (Horizontal)
- * @param y Ordinate (Vertical)
- */
-void Point::set(double x, double y) {
-    this->x = std::min(std::max(x, -1.0), 1.0);
-    this->y = std::min(std::max(y, -1.0), 1.0);
-}
-
-/**
- * @brief Return a point coordinate value
- *
- * @param coordinate Coordinate char
- * @return Coordinate value
- */
-double Point::get(char coordinate) {
-    double value = 0;
-
-    if (coordinate == 'x') {
-        value = this->x;
-    } else {
-        value = this->y;
+void Vertex::set(double position[4], double color[4]) {
+    for (int index = 0; index < 4; index++) {
+        this->position[index] = std::max(std::min(position[index], 1.0), -1.0);
+        this->color[index] = std::max(std::min(color[index], 1.0), 0.0);
     }
-
-    return value;
-}
-
-/**
- * @brief Initialize a block with default values
- */
-Block::Block(void) {
-    this->position = Point(0, 0);
-    this->color = 0.96;
-}
-
-/**
- * @brief Initialize a block with given position and default color
- *
- * @param x Horizontal position
- * @param y Vertical position
- */
-Block::Block(double x, double y) {
-    this->position = Point(x, y);
-    this->color = 0.96;
-}
-
-/**
- * @brief Initialize a block with position and color given
- *
- * @param x Horizontal position
- * @param y Vertical position
- * @param color Color value
- */
-Block::Block(double x, double y, double color) {
-    this->position = Point(x, y);
-    this->color = color;
-}
-
-/**
- * @brief Get block coordinate
- *
- * @param coordinate Coordinate char
- * @return Coordinate value
- */
-double Block::get(char coordinate) { return this->position.get(coordinate); }
-
-/**
- * @brief Draw a block in scene
- *
- * @param size Size of side block
- */
-void Block::draw(double size) {
-    size = 2.0 / size;
-
-    double x = this->position.get('x');
-    double y = this->position.get('y');
-}
-
-/**
- * @brief Set block to other position
- *
- * @param x Horizontal position
- * @param y Vertical position
- */
-void Block::set(double x, double y) { this->position.set(x, y); }
-
-/**
- * @brief Move block to other position
- *
- * @param x Horizontal position
- * @param y Vertical position
- */
-void Block::move(double x, double y) {
-    x += this->position.get('x');
-    y += this->position.get('y');
-
-    this->move(x, y);
 }
 
 }  // namespace geometry
