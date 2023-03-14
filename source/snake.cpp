@@ -19,13 +19,17 @@ Snake::Snake(const unsigned amount) : amount(amount) {
 }
 
 /**
- * @brief Initialize the snake with given position and default color
+ * @brief Set the snake with given position and color
  *
  * @param x Initial horizontal position
  * @param y Initial vertical position
+ * @param step Block side size
+ * @param color Snake color
  * @param amount Size of snake
  */
-Snake::Snake(double x, double y, double step, double color, const unsigned amount) : amount(amount) {
+void Snake::set(double x, double y, double step, double color) {
+    this->step = 2.0 / step;
+
     this->body = std::vector<render::Object>(this->amount);
 
     for (int index = 0; index < amount; index++) {
@@ -35,8 +39,6 @@ Snake::Snake(double x, double y, double step, double color, const unsigned amoun
 
 /**
  * @brief Draw the snake
- *
- * @param size Size of side block
  */
 void Snake::draw(void) {
     for (int index = 0; index < this->size; index++) {
@@ -51,14 +53,12 @@ void Snake::draw(void) {
  * @param horizontal Sense in horizontal
  * @param vertical Sense in vertical
  */
-void Snake::move(double size) {
-    double step = 2.0 / size;
-
+void Snake::move(void) {
     for (int index = 1; index < this->size; index++) {
         this->body[index] = this->body[index - 1];
     }
 
-    this->body[0].set(step * this->horizontal, step * this->vertical);
+    this->body[0].set(this->step * this->horizontal, this->step * this->vertical);
 }
 
 /**
