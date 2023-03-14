@@ -1,15 +1,19 @@
+#define GLEW_STATIC
+
+#include <GL/glew.h>
+
 #include "../include/settings.hpp"
 
 namespace settings {
-const unsigned unit = 25;
-const unsigned size = unit * unit;
+const GLuint unit = 25;
+const GLuint size = unit * unit;
 
-int width = size;
-int height = size;
+GLint width = size;
+GLint height = size;
 
-char title[6] = "Snake";
+GLchar title[6] = "Snake";
 
-double back_colors[7][4] = {
+GLfloat back[7][4] = {
     {0.96, 0.24, 0.30, 1.0},  // red
     {0.00, 0.81, 0.90, 1.0},  // blue
     {0.92, 0.81, 0.16, 1.0},  // yellow
@@ -19,7 +23,7 @@ double back_colors[7][4] = {
     {1.00, 0.38, 0.48, 1.0}   // pink
 };
 
-double food_colors[7][4] = {
+GLfloat fore[7][4] = {
     {0.70, 0.08, 0.14, 1.0},  // red
     {0.09, 0.63, 0.69, 1.0},  // blue
     {0.76, 0.65, 0.07, 1.0},  // yellow
