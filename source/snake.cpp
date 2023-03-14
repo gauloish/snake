@@ -38,7 +38,7 @@ Snake::Snake(double x, double y, double step, double color, const unsigned amoun
  *
  * @param size Size of side block
  */
-void Snake::draw(double size) {
+void Snake::draw(void) {
     for (int index = 0; index < this->size; index++) {
         this->body[index].draw();
     }
