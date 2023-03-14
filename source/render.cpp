@@ -102,12 +102,6 @@ void Object::set(GLfloat x, GLfloat y, GLfloat step, GLfloat *color) {
         this->data[6 * index + 5] = this->square.vertices[index].b;
     }
 
-    for (int index = 0; index < 24; index++) {
-        std::cout << this->data[index] << " ";
-    }
-
-    std::cout << "\n";
-
     this->indices[0] = 0;
     this->indices[1] = 1;
     this->indices[2] = 2;
