@@ -1,6 +1,6 @@
 #include <vector>
 
-#include "geometry.hpp"
+#include "render.hpp"
 
 #ifndef SNAKE_HPP
 #define SNAKE_HPP
@@ -12,7 +12,7 @@ namespace snake {
  */
 class Snake {
    private:
-    std::vector<geometry::Block> blocks;
+    std::vector<render::Object> body;
 
     unsigned size{1};
     const unsigned amount;
@@ -22,15 +22,13 @@ class Snake {
 
    public:
     Snake(const unsigned);
-    Snake(double, double, const unsigned);
-    Snake(double, double, double, const unsigned);
+    Snake(double, double, double, double, const unsigned);
 
     void draw(double);
     void move(double);
     void sense(int, int);
     void shift(void);
 };
-
 }  // namespace snake
 
 #endif
