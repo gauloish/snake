@@ -18,25 +18,27 @@ class Object {
    private:
     geometry::Block square;
 
-    double step;
-    double color;
+    GLfloat step;
+    GLfloat color[3];
 
-    double data[24];
-    double indices[6];
+    GLfloat data[24];
+    GLuint indices[6];
 
-    unsigned int buffer;
-    unsigned int element;
-    unsigned int vertex;
-    unsigned int fragment;
-    unsigned int program;
+    GLuint array;
+    GLuint buffer;
+    GLuint element;
+    GLuint vertex;
+    GLuint fragment;
+    GLuint program;
 
    public:
     Object(void);
-    Object(double, double, double, double);
+    Object(GLfloat, GLfloat, GLfloat, GLfloat);
     ~Object(void);
 
-    void set(double, double);
-    void set(double, double, double, double);
+    void set(GLfloat, GLfloat);
+    void set(GLfloat, GLfloat, GLfloat, GLfloat);
+    void set(GLfloat, GLfloat, GLfloat, GLfloat *);
     void configure(void);
     void draw(void);
 };

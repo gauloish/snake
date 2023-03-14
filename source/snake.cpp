@@ -1,4 +1,9 @@
+#define GLEW_STATIC
+
+#include <GL/glew.h>
+
 #include <algorithm>
+#include <iostream>
 #include <vector>
 
 #include "../include/render.hpp"
@@ -10,7 +15,7 @@ namespace snake {
  *
  * @param amount Size of snake
  */
-Snake::Snake(const unsigned amount) : amount(amount) {
+Snake::Snake(const GLuint amount) : amount(amount) {
     this->body = std::vector<render::Object>(this->amount);
 
     for (int index = 0; index < this->amount; index++) {
@@ -27,12 +32,30 @@ Snake::Snake(const unsigned amount) : amount(amount) {
  * @param color Snake color
  * @param amount Size of snake
  */
-void Snake::set(double x, double y, double step, double color) {
-    this->step = 2.0 / step;
+void Snake::set(GLfloat x, GLfloat y, GLfloat step, GLfloat color) {
+    this->step = step;
 
     this->body = std::vector<render::Object>(this->amount);
 
-    for (int index = 0; index < amount; index++) {
+    for (int index = 0; index < this->amount; index++) {
+        this->body[index] = render::Object(x, y, step, color);
+    }
+}
+
+/* @brief Set the snake with given position and color
+ *
+ * @param x Initial horizontal position
+ * @param y Initial vertical position
+ * @param step Block side size
+ * @param color Snake color
+ * @param amount Size of snake
+ */
+void Snake::set(GLfloat x, GLfloat y, GLfloat step, GLfloat *color) {
+    this->step = step;
+
+    this->body = std::vector<render::Object>(this->amount);
+
+    for (int index = 0; index < this->amount; index++) {
         this->body[index] = render::Object(x, y, step, color);
     }
 }
@@ -67,7 +90,7 @@ void Snake::move(void) {
  * @param horizontal Horizontal sense
  * @param vertical Vertical sense
  */
-void Snake::sense(int horizontal, int vertical) {
+void Snake::sense(GLint horizontal, GLint vertical) {
     this->horizontal = horizontal;
     this->vertical = vertical;
 }

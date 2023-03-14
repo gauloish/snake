@@ -1,3 +1,7 @@
+#define GLEW_STATIC
+
+#include <GL/glew.h>
+
 #include <vector>
 
 #include "render.hpp"
@@ -14,21 +18,22 @@ class Snake {
    private:
     std::vector<render::Object> body;
 
-    unsigned size{1};
-    const unsigned amount;
+    GLuint size{1};
+    const GLuint amount;
 
-    int horizontal{0};
-    int vertical{0};
+    GLint horizontal{0};
+    GLint vertical{0};
 
-    double step;
+    GLfloat step;
 
    public:
-    Snake(const unsigned);
+    Snake(const GLuint);
 
-    void set(double, double, double, double);
+    void set(GLfloat, GLfloat, GLfloat, GLfloat);
+    void set(GLfloat, GLfloat, GLfloat, GLfloat *);
     void draw(void);
     void move(void);
-    void sense(int, int);
+    void sense(GLint, GLint);
     void shift(void);
 };
 }  // namespace snake
