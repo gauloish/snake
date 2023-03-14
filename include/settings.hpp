@@ -14,8 +14,8 @@ extern GLint height;
 
 extern GLchar title[6];
 
-extern GLfloat back[7][4];
-extern GLfloat fore[7][4];
+extern GLfloat back[7][3];
+extern GLfloat fore[7][3];
 }  // namespace settings
 
 #endif
