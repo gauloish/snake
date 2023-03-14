@@ -1,7 +1,7 @@
 #include <algorithm>
 #include <vector>
 
-#include "../include/geometry.hpp"
+#include "../include/render.hpp"
 #include "../include/snake.hpp"
 
 namespace snake {
@@ -11,10 +11,10 @@ namespace snake {
  * @param amount Size of snake
  */
 Snake::Snake(const unsigned amount) : amount(amount) {
-    this->blocks = std::vector<geometry::Block>(this->amount);
+    this->body = std::vector<render::Object>(this->amount);
 
     for (int index = 0; index < this->amount; index++) {
-        this->blocks[index] = geometry::Block();
+        this->body[index] = render::Object();
     }
 }
 
@@ -25,28 +25,11 @@ Snake::Snake(const unsigned amount) : amount(amount) {
  * @param y Initial vertical position
  * @param amount Size of snake
  */
-Snake::Snake(double x, double y, const unsigned amount) : amount(amount) {
-    this->blocks = std::vector<geometry::Block>(this->amount);
+Snake::Snake(double x, double y, double step, double color, const unsigned amount) : amount(amount) {
+    this->body = std::vector<render::Object>(this->amount);
 
     for (int index = 0; index < amount; index++) {
-        this->blocks[index] = geometry::Block(x, y);
-    }
-}
-
-/**
- * @brief Initialize the snake with given position and color
- *
- * @param x Initial horizontal position
- * @param y Initial vertical position
- * @param color Snake color
- * @param amount Size of snake
- */
-Snake::Snake(double x, double y, double color, const unsigned amount)
-    : amount(amount) {
-    this->blocks = std::vector<geometry::Block>(this->amount);
-
-    for (int index = 0; index < amount; index++) {
-        this->blocks[index] = geometry::Block(x, y, color);
+        this->body[index] = render::Object(x, y, step, color);
     }
 }
 
@@ -57,7 +40,7 @@ Snake::Snake(double x, double y, double color, const unsigned amount)
  */
 void Snake::draw(double size) {
     for (int index = 0; index < this->size; index++) {
-        this->blocks[index].draw(size);
+        this->body[index].draw();
     }
 }
 
@@ -69,16 +52,13 @@ void Snake::draw(double size) {
  * @param vertical Sense in vertical
  */
 void Snake::move(double size) {
-    size = 2.0 / size;
+    double step = 2.0 / size;
 
     for (int index = 1; index < this->size; index++) {
-        double x = this->blocks[index - 1].get('x');
-        double y = this->blocks[index - 1].get('y');
-
-        this->blocks[index].move(x, y);
+        this->body[index] = this->body[index - 1];
     }
 
-    this->blocks[0].move(size * this->horizontal, size * this->vertical);
+    this->body[0].set(step * this->horizontal, step * this->vertical);
 }
 
 /**
