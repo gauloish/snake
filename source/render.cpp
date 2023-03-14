@@ -26,6 +26,13 @@ Object::Object(double x, double y, double step, double color) {
     this->set(x, y, step, color);
     this->configure();
 }
+/**
+ * @brief Set object values
+ *
+ * @param x Horizontal position
+ * @param y Vertical position
+ */
+void Object::set(double x, double y) { this->set(x, y, this->step, this->color); }
 
 /**
  * @brief Set object values
@@ -53,6 +60,9 @@ void Object::set(double x, double y, double step, double color) {
     this->indices[3] = 2;
     this->indices[4] = 3;
     this->indices[5] = 0;
+
+    this->step = step;
+    this->color = color;
 }
 
 /**
