@@ -24,7 +24,7 @@ class Snake {
     Snake(const unsigned);
     Snake(double, double, double, double, const unsigned);
 
-    void draw(double);
+    void draw(void);
     void move(double);
     void sense(int, int);
     void shift(void);
