@@ -34,6 +34,7 @@ class Object {
    public:
     Object(void);
     Object(GLfloat, GLfloat, GLfloat, GLfloat);
+    Object(GLfloat, GLfloat, GLfloat, GLfloat *);
     ~Object(void);
 
     void set(GLfloat, GLfloat);

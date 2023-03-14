@@ -26,6 +26,20 @@ Object::Object(GLfloat x, GLfloat y, GLfloat step, GLfloat color) {
     this->set(x, y, step, color);
     this->configure();
 }
+
+/**
+ * @brief Initialize object with given values
+ *
+ * @param x Horizontal position
+ * @param y Vertical position
+ * @param step Block side size
+ * @param color Object color array
+ */
+Object::Object(GLfloat x, GLfloat y, GLfloat step, GLfloat *color) {
+    this->set(x, y, step, color);
+    this->configure();
+}
+
 /**
  * @brief Set object values
  *
@@ -54,12 +68,6 @@ void Object::set(GLfloat x, GLfloat y, GLfloat step, GLfloat color) {
         this->data[6 * index + 5] = this->square.vertices[index].b;
     }
 
-    for (int index = 0; index < 24; index++) {
-        std::cout << this->data[index] << " ";
-    }
-
-    std::cout << "\n";
-
     this->indices[0] = 0;
     this->indices[1] = 1;
     this->indices[2] = 2;
@@ -80,7 +88,7 @@ void Object::set(GLfloat x, GLfloat y, GLfloat step, GLfloat color) {
  * @param x Horizontal position
  * @param y Vertical position
  * @param step Block side size
- * @param color Object color
+ * @param color Object color array
  */
 void Object::set(GLfloat x, GLfloat y, GLfloat step, GLfloat *color) {
     this->square = geometry::Block(x, y, step, color);
