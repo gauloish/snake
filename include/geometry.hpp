@@ -1,3 +1,7 @@
+#define GLEW_STATIC
+
+#include <GL/glew.h>
+
 #include <vector>
 
 #ifndef POINT_HPP
@@ -10,8 +14,8 @@ namespace geometry {
  *
  */
 struct Vertex {
-    double x, y, z;
-    double r, g, b;
+    GLfloat x, y, z;
+    GLfloat r, g, b;
 };
 
 /**
@@ -23,9 +27,11 @@ struct Block {
     Vertex vertices[4];
 
     Block(void);
-    Block(double, double, double, double);
+    Block(GLfloat, GLfloat, GLfloat, GLfloat);
+    Block(GLfloat, GLfloat, GLfloat, GLfloat *);
 
-    void set(double, double, double, double);
+    void set(GLfloat, GLfloat, GLfloat, GLfloat);
+    void set(GLfloat, GLfloat, GLfloat, GLfloat *);
 };
 }  // namespace geometry
 
