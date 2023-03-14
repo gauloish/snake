@@ -20,12 +20,14 @@ class Snake {
     int horizontal{0};
     int vertical{0};
 
+    double step;
+
    public:
     Snake(const unsigned);
-    Snake(double, double, double, double, const unsigned);
 
+    void set(double, double, double, double);
     void draw(void);
-    void move(double);
+    void move(void);
     void sense(int, int);
     void shift(void);
 };
