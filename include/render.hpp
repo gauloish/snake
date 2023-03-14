@@ -18,6 +18,9 @@ class Object {
    private:
     geometry::Block square;
 
+    double step;
+    double color;
+
     double data[24];
     double indices[6];
 
@@ -32,6 +35,7 @@ class Object {
     Object(double, double, double, double);
     ~Object(void);
 
+    void set(double, double);
     void set(double, double, double, double);
     void configure(void);
     void draw(void);
