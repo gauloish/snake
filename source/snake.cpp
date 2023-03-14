@@ -76,5 +76,4 @@ void Snake::sense(int horizontal, int vertical) {
  * @brief Added one more block to snake
  */
 void Snake::shift(void) { this->size = std::min(this->amount, this->size + 1); }
-
 }  // namespace snake
