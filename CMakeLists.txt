@@ -19,10 +19,11 @@ endif()
 set (
 	SOURCES
 	source/main.cpp
-	source/point.cpp
+	source/geometry.cpp
 	source/settings.cpp
 	source/snake.cpp
 	source/functions.cpp
+	source/render.cpp
 	)
 
 add_executable( snake ${SOURCES} )
