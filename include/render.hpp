@@ -9,18 +9,23 @@
 #define RENDER_HPP
 
 namespace render {
+/**
+ * @class Object
+ * @brief A Object in game, a renderable square
+ *
+ */
 class Object {
    private:
     geometry::Block square;
-    double data[24];
 
-    unsigned int array;
+    double data[24];
+    double indices[6];
+
     unsigned int buffer;
+    unsigned int element;
     unsigned int vertex;
     unsigned int fragment;
     unsigned int program;
-
-    int state;
 
    public:
     Object(void);
@@ -29,7 +34,7 @@ class Object {
 
     void set(double, double, double, double);
     void configure(void);
-    void draw(double, double);
+    void draw(void);
 };
 }  // namespace render
 
