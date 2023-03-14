@@ -13,7 +13,7 @@ GLint height = size;
 
 GLchar title[6] = "Snake";
 
-GLfloat back[7][4] = {
+GLfloat back[7][3] = {
     {0.96, 0.24, 0.30},  // red
     {0.00, 0.81, 0.90},  // blue
     {0.92, 0.81, 0.16},  // yellow
@@ -23,7 +23,7 @@ GLfloat back[7][4] = {
     {1.00, 0.38, 0.48}   // pink
 };
 
-GLfloat fore[7][4] = {
+GLfloat fore[7][3] = {
     {0.70, 0.08, 0.14},  // red
     {0.09, 0.63, 0.69},  // blue
     {0.76, 0.65, 0.07},  // yellow
