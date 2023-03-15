@@ -69,6 +69,8 @@ void update(GLFWwindow *window, snake::Snake &snake) {
             }
         }
     }
+
+    snake.move();
 }
 
 void reshape(GLFWwindow *window) {
