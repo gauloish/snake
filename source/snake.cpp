@@ -34,6 +34,9 @@ void Snake::set(GLfloat x, GLfloat y, GLfloat step, GLfloat color) {
     for (int index = 0; index < this->amount; index++) {
         this->body[index].set(x, y, step, color);
     }
+
+    this->x = x;
+    this->y = y;
 }
 
 /* @brief Set the snake with given position and color
@@ -52,6 +55,9 @@ void Snake::set(GLfloat x, GLfloat y, GLfloat step, GLfloat *color) {
     for (int index = 0; index < this->amount; index++) {
         this->body[index].set(x, y, step, color);
     }
+
+    this->x = x;
+    this->y = y;
 }
 
 /**
@@ -80,11 +86,14 @@ void Snake::draw(void) {
  * @param vertical Sense in vertical
  */
 void Snake::move(void) {
-    for (int index = 1; index < this->size; index++) {
+    for (int index = this->size - 1; index > 0; index--) {
         this->body[index] = this->body[index - 1];
     }
 
-    this->body[0].set(this->step * this->horizontal, this->step * this->vertical);
+    this->x += this->step * this->horizontal;
+    this->y += this->step * this->vertical;
+
+    this->body[0].set(this->x, this->y);
 }
 
 /**

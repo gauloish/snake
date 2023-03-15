@@ -24,6 +24,9 @@ class Snake {
     GLint horizontal{0};
     GLint vertical{0};
 
+    GLfloat x;
+    GLfloat y;
+
     GLfloat step;
 
    public:
