@@ -7,6 +7,7 @@
 #include <vector>
 
 #include "../include/object.hpp"
+#include "../include/settings.hpp"
 #include "../include/snake.hpp"
 
 namespace snake {
@@ -97,7 +98,7 @@ void Snake::move(void) {
         this->body[0].set(this->x, this->y);
     }
 
-    this->counter = (this->counter + 1) % 5;
+    this->counter = (this->counter + 1) % settings::rate;
 }
 
 /**

@@ -8,6 +8,8 @@ namespace settings {
 const GLuint unit = 25;
 const GLuint size = unit * unit;
 
+const GLuint rate = 5;
+
 GLint width = size;
 GLint height = size;
 
