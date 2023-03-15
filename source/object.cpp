@@ -46,7 +46,7 @@ Object::Object(GLfloat x, GLfloat y, GLfloat step, GLfloat *color) {
  * @param letter [TODO:parameter]
  * @return [TODO:return]
  */
-GLfloat Object::get(char letter) {
+GLfloat Object::get(GLchar letter) {
     static GLchar letters[6] = {'x', 'y', 'z', 'r', 'g', 'b'};
 
     for (int index = 0; index < 6; index++) {
