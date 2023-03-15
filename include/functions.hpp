@@ -15,6 +15,7 @@ void init(snake::Snake &, render::Object &);
 void update(GLFWwindow *, snake::Snake &);
 void render(GLFWwindow *, snake::Snake &, render::Object &);
 void reshape(GLFWwindow *);
+void centralize(GLFWwindow *);
 void run(void);
 }  // namespace functions
 

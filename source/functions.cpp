@@ -21,16 +21,27 @@ int randomic(int inferior, int superior) {
 }
 
 void init(snake::Snake &snake, render::Object &base) {
-    std::random_device device;
-    std::mt19937 generator(device());
-
     int color = randomic(0, 7);
 
     glClearColor(settings::fore[color][0], settings::fore[color][1], settings::fore[color][2], 1.0);
 
     snake.set(0.0, 0.0, 2.0 / (GLfloat)settings::unit, 0.9);
-    base.set(0.5, 0.5, 2.0 / (GLfloat)settings::unit, 0.5);
-    // base.set(-0.5, 0.5, 0.5, settings::back[color]);
+    base.set(-1.0, 1.0, 2.0, settings::back[color]);
+
+    snake.configure();
+    base.configure();
+}
+
+void centralize(GLFWwindow *window) {
+    GLint width;
+    GLint height;
+
+    glfwGetFramebufferSize(window, &width, &height);
+
+    GLFWmonitor *monitor = glfwGetPrimaryMonitor();
+    const GLFWvidmode *mode = glfwGetVideoMode(monitor);
+
+    glfwSetWindowPos(window, (mode->width - width) / 2, (mode->height - height) / 2);
 }
 
 /**
@@ -61,7 +72,8 @@ void update(GLFWwindow *window, snake::Snake &snake) {
 }
 
 void reshape(GLFWwindow *window) {
-    GLint width, height;
+    GLint width;
+    GLint height;
 
     glfwGetFramebufferSize(window, &width, &height);
 
@@ -94,6 +106,9 @@ void render(GLFWwindow *window, snake::Snake &snake, render::Object &base) {
  * @brief Run the game
  */
 void run(void) {
+    std::random_device device;
+    std::mt19937 generator(device());
+
     if (not glfwInit()) {
         std::cerr << "Error: GLFW did not initialized!";
 
@@ -139,6 +154,8 @@ void run(void) {
     std::cout << "Status: Using OpenGL " << glGetString(GL_VERSION) << "\n";
     std::cout << "Status: Using GLEW   " << glewGetString(GLEW_VERSION) << "\n";
     std::cout << "Status: Using GLFW   " << glfwGetVersionString() << "\n";
+
+    centralize(window);
 
     while (not glfwWindowShouldClose(window)) {
         snake::Snake snake = snake::Snake(settings::size);
