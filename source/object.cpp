@@ -41,6 +41,24 @@ Object::Object(GLfloat x, GLfloat y, GLfloat step, GLfloat *color) {
 }
 
 /**
+ * @brief Return a
+ *
+ * @param letter [TODO:parameter]
+ * @return [TODO:return]
+ */
+GLfloat Object::get(char letter) {
+    static GLchar letters[6] = {'x', 'y', 'z', 'r', 'g', 'b'};
+
+    for (int index = 0; index < 6; index++) {
+        if (letter == letters[index]) {
+            return this->data[index];
+        }
+    }
+
+    return 0.0;
+}
+
+/**
  * @brief Set object values
  *
  * @param x Horizontal position

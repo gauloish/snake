@@ -37,6 +37,7 @@ class Object {
     Object(GLfloat, GLfloat, GLfloat, GLfloat *);
     ~Object(void);
 
+    GLfloat get(char);
     void set(GLfloat, GLfloat);
     void set(GLfloat, GLfloat, GLfloat, GLfloat);
     void set(GLfloat, GLfloat, GLfloat, GLfloat *);
