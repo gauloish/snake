@@ -10,7 +10,7 @@ namespace geometry {
 /**
  * @brief Initialize a block with default values
  */
-Block::Block(void) { this->set(0.0, 0.0, 0.0, 0.0); }
+Block::Block(void) {}
 
 /**
  * @brief Initialize a block with given values
