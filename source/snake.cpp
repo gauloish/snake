@@ -19,6 +19,23 @@ namespace snake {
 Snake::Snake(const GLuint amount) : amount(amount) {}
 
 /**
+ * @brief Get snake body attributes
+ *
+ * @param index Index block snake
+ * @param letter Value
+ * @return Block snake attribute
+ */
+GLfloat Snake::get(GLuint index, GLchar letter) {
+    if (index < this->size) {
+        return this->body[index].get(letter);
+    }
+
+    std::cerr << "Index out of range in ´Snake::get(GLuint, GLchar)´!\n";
+
+    return 0.0;
+}
+
+/**
  * @brief Set the snake with given position and color
  *
  * @param x Initial horizontal position

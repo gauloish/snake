@@ -34,6 +34,7 @@ class Snake {
    public:
     Snake(const GLuint);
 
+    GLfloat get(GLuint, GLchar);
     void set(GLfloat, GLfloat, GLfloat, GLfloat);
     void set(GLfloat, GLfloat, GLfloat, GLfloat *);
     void configure(void);
