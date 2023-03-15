@@ -55,6 +55,8 @@ GLfloat Object::get(GLchar letter) {
         }
     }
 
+    std::cerr << "Attribute absent in ´Object::get(GLchar)´!\n";
+
     return 0.0;
 }
 
