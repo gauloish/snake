@@ -86,14 +86,18 @@ void Snake::draw(void) {
  * @param vertical Sense in vertical
  */
 void Snake::move(void) {
-    for (int index = this->size - 1; index > 0; index--) {
-        this->body[index] = this->body[index - 1];
+    if (this->counter == 0) {
+        for (int index = this->size - 1; index > 0; index--) {
+            this->body[index] = this->body[index - 1];
+        }
+
+        this->x += this->step * this->horizontal;
+        this->y += this->step * this->vertical;
+
+        this->body[0].set(this->x, this->y);
     }
 
-    this->x += this->step * this->horizontal;
-    this->y += this->step * this->vertical;
-
-    this->body[0].set(this->x, this->y);
+    this->counter = (this->counter + 1) % 5;
 }
 
 /**

@@ -21,6 +21,8 @@ class Snake {
     GLuint size{1};
     const GLuint amount;
 
+    GLuint counter{0};
+
     GLint horizontal{0};
     GLint vertical{0};
 
