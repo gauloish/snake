@@ -12,7 +12,7 @@ namespace render {
 /**
  * @brief Initialize object with default values (null values)
  */
-Object::Object(void) : Object::Object(0.0, 0.0, 0.0, 0.0) {}
+Object::Object(void) {}
 
 /**
  * @brief Initialize object with given values
@@ -57,7 +57,7 @@ void Object::set(GLfloat x, GLfloat y) { this->set(x, y, this->step, this->color
  * @param color Object color
  */
 void Object::set(GLfloat x, GLfloat y, GLfloat step, GLfloat color) {
-    this->square = geometry::Block(x, y, step, color);
+    this->square.set(x, y, step, color);
 
     for (int index = 0; index < 4; index++) {
         this->data[6 * index + 0] = this->square.vertices[index].x;
@@ -91,7 +91,7 @@ void Object::set(GLfloat x, GLfloat y, GLfloat step, GLfloat color) {
  * @param color Object color array
  */
 void Object::set(GLfloat x, GLfloat y, GLfloat step, GLfloat *color) {
-    this->square = geometry::Block(x, y, step, color);
+    this->square.set(x, y, step, color);
 
     for (int index = 0; index < 4; index++) {
         this->data[6 * index + 0] = this->square.vertices[index].x;
@@ -121,7 +121,7 @@ void Object::set(GLfloat x, GLfloat y, GLfloat step, GLfloat *color) {
  */
 void Object::configure(void) {
     const char *vertexSource = R"glsl(
-		#version 150 core
+		#version 420 core
 
 		in vec3 position;
 		in vec3 color;
@@ -136,7 +136,7 @@ void Object::configure(void) {
 	)glsl";
 
     const char *fragmentSource = R"glsl(
-		#version 150 core
+		#version 420 core
 
 		in vec4 middleColor;
 		out vec4 outColor;
@@ -214,12 +214,12 @@ void Object::configure(void) {
     glGenBuffers(1, &this->buffer);
 
     glBindBuffer(GL_ARRAY_BUFFER, this->buffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(this->data), this->data, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(this->data), this->data, GL_DYNAMIC_DRAW);
 
     glGenBuffers(1, &this->element);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->element);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(this->indices), this->indices, GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(this->indices), this->indices, GL_DYNAMIC_DRAW);
 
     GLint position = glGetAttribLocation(this->program, "position");
     glEnableVertexAttribArray(position);
@@ -239,6 +239,8 @@ void Object::configure(void) {
 void Object::draw(void) {
     glUseProgram(program);
     glBindVertexArray(array);
+    glBindBuffer(GL_ARRAY_BUFFER, this->buffer);
+    glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(this->data), this->data);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
 }
