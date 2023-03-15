@@ -23,7 +23,7 @@ set (
 	source/settings.cpp
 	source/snake.cpp
 	source/functions.cpp
-	source/render.cpp
+	source/object.cpp
 	)
 
 add_executable( snake ${SOURCES} )

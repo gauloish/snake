@@ -6,7 +6,7 @@
 #include <iostream>
 #include <vector>
 
-#include "../include/render.hpp"
+#include "../include/object.hpp"
 #include "../include/snake.hpp"
 
 namespace snake {
@@ -29,7 +29,7 @@ Snake::Snake(const GLuint amount) : amount(amount) {}
 void Snake::set(GLfloat x, GLfloat y, GLfloat step, GLfloat color) {
     this->step = step;
 
-    this->body = std::vector<render::Object>(this->amount);
+    this->body = std::vector<object::Object>(this->amount);
 
     for (int index = 0; index < this->amount; index++) {
         this->body[index].set(x, y, step, color);
@@ -50,7 +50,7 @@ void Snake::set(GLfloat x, GLfloat y, GLfloat step, GLfloat color) {
 void Snake::set(GLfloat x, GLfloat y, GLfloat step, GLfloat *color) {
     this->step = step;
 
-    this->body = std::vector<render::Object>(this->amount);
+    this->body = std::vector<object::Object>(this->amount);
 
     for (int index = 0; index < this->amount; index++) {
         this->body[index].set(x, y, step, color);

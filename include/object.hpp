@@ -5,10 +5,10 @@
 
 #include "../include/geometry.hpp"
 
-#ifndef RENDER_HPP
-#define RENDER_HPP
+#ifndef OBJECT_HPP
+#define OBJECT_HPP
 
-namespace render {
+namespace object {
 /**
  * @class Object
  * @brief A Object in game, a renderable square
@@ -43,6 +43,6 @@ class Object {
     void configure(void);
     void draw(void);
 };
-}  // namespace render
+}  // namespace object
 
 #endif

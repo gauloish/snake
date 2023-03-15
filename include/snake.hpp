@@ -4,7 +4,7 @@
 
 #include <vector>
 
-#include "render.hpp"
+#include "object.hpp"
 
 #ifndef SNAKE_HPP
 #define SNAKE_HPP
@@ -16,7 +16,7 @@ namespace snake {
  */
 class Snake {
    private:
-    std::vector<render::Object> body;
+    std::vector<object::Object> body;
 
     GLuint size{1};
     const GLuint amount;

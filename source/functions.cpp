@@ -8,7 +8,7 @@
 
 #include "../include/functions.hpp"
 #include "../include/geometry.hpp"
-#include "../include/render.hpp"
+#include "../include/object.hpp"
 #include "../include/settings.hpp"
 #include "../include/snake.hpp"
 
@@ -20,7 +20,7 @@ int randomic(int inferior, int superior) {
     return uniform(engine);
 }
 
-void init(snake::Snake &snake, render::Object &base) {
+void init(snake::Snake &snake, object::Object &base) {
     int color = randomic(0, 7);
 
     glClearColor(settings::fore[color][0], settings::fore[color][1], settings::fore[color][2], 1.0);
@@ -94,7 +94,7 @@ void reshape(GLFWwindow *window) {
  * @param window Window where will be rendered stuffs
  * @param snake The snake object
  */
-void render(GLFWwindow *window, snake::Snake &snake, render::Object &base) {
+void render(GLFWwindow *window, snake::Snake &snake, object::Object &base) {
     glClear(GL_COLOR_BUFFER_BIT);
 
     base.draw();
@@ -161,7 +161,7 @@ void run(void) {
 
     while (not glfwWindowShouldClose(window)) {
         snake::Snake snake = snake::Snake(settings::size);
-        render::Object base = render::Object();
+        object::Object base = object::Object();
 
         init(snake, base);
 

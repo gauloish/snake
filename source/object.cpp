@@ -6,9 +6,9 @@
 #include <iostream>
 
 #include "../include/geometry.hpp"
-#include "../include/render.hpp"
+#include "../include/object.hpp"
 
-namespace render {
+namespace object {
 /**
  * @brief Initialize object with default values (null values)
  */
@@ -256,4 +256,4 @@ Object::~Object(void) {
     glDeleteBuffers(1, &element);
     glDeleteProgram(program);
 }
-}  // namespace render
+}  // namespace object
