@@ -31,6 +31,7 @@ class Snake {
 
     void set(GLfloat, GLfloat, GLfloat, GLfloat);
     void set(GLfloat, GLfloat, GLfloat, GLfloat *);
+    void configure(void);
     void draw(void);
     void move(void);
     void sense(GLint, GLint);

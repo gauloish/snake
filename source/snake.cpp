@@ -15,13 +15,7 @@ namespace snake {
  *
  * @param amount Size of snake
  */
-Snake::Snake(const GLuint amount) : amount(amount) {
-    this->body = std::vector<render::Object>(this->amount);
-
-    for (int index = 0; index < this->amount; index++) {
-        this->body[index] = render::Object();
-    }
-}
+Snake::Snake(const GLuint amount) : amount(amount) {}
 
 /**
  * @brief Set the snake with given position and color
@@ -38,7 +32,7 @@ void Snake::set(GLfloat x, GLfloat y, GLfloat step, GLfloat color) {
     this->body = std::vector<render::Object>(this->amount);
 
     for (int index = 0; index < this->amount; index++) {
-        this->body[index] = render::Object(x, y, step, color);
+        this->body[index].set(x, y, step, color);
     }
 }
 
@@ -56,7 +50,16 @@ void Snake::set(GLfloat x, GLfloat y, GLfloat step, GLfloat *color) {
     this->body = std::vector<render::Object>(this->amount);
 
     for (int index = 0; index < this->amount; index++) {
-        this->body[index] = render::Object(x, y, step, color);
+        this->body[index].set(x, y, step, color);
+    }
+}
+
+/**
+ * @brief Configure snake to render
+ */
+void Snake::configure(void) {
+    for (int index = 0; index < this->amount; index++) {
+        this->body[index].configure();
     }
 }
 
