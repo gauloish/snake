@@ -13,6 +13,13 @@
 #include "../include/snake.hpp"
 
 namespace functions {
+/**
+ * @brief Generate a randum integer number inside a given range
+ *
+ * @param inferior Smaller value in range
+ * @param superior Greater value in range
+ * @return Random integer in range
+ */
 int random(int inferior, int superior) {
     static std::random_device device;
     static std::mt19937 engine(device());
@@ -22,21 +29,44 @@ int random(int inferior, int superior) {
     return uniform(engine);
 }
 
-void init(snake::Snake &snake, object::Object &base) {
+/**
+ * @brief Initialize objects in game
+ *
+ * @param snake Snake
+ * @param base Background
+ */
+void init(snake::Snake &snake, object::Object &base, object::Object &food) {
     int color = random(0, 6);
 
     glClearColor(settings::fore[color][0], settings::fore[color][1], settings::fore[color][2], 1.0);
 
-    GLfloat x = 2.0 * random(0, settings::unit - 1) / (GLfloat)settings::unit - 1.0;
-    GLfloat y = 2.0 * random(0, settings::unit - 1) / (GLfloat)settings::unit - 1.0;
+    GLfloat snake_x = 2.0 * random(0, settings::unit - 1) / (GLfloat)settings::unit - 1.0;
+    GLfloat snake_y = 2.0 * random(0, settings::unit - 1) / (GLfloat)settings::unit - 1.0;
 
-    snake.set(x, y, 2.0 / (GLfloat)settings::unit, 0.9);
+    snake.set(snake_x, snake_y, 2.0 / (GLfloat)settings::unit, 0.9);
     base.set(-1.0, 1.0, 2.0, settings::back[color]);
+
+    while (true) {
+        GLfloat food_x = 2.0 * random(0, settings::unit - 1) / (GLfloat)settings::unit - 1.0;
+        GLfloat food_y = 2.0 * random(0, settings::unit - 1) / (GLfloat)settings::unit - 1.0;
+
+        if (food_x != snake_x and food_y != snake_y) {
+            food.set(food_x, food_y, 2.0 / (GLfloat)settings::unit, settings::fore[color][0]);
+
+            break;
+        }
+    }
 
     snake.configure();
     base.configure();
+    food.configure();
 }
 
+/**
+ * @brief Centralize window in screen
+ *
+ * @param window Game window
+ */
 void centralize(GLFWwindow *window) {
     GLint width;
     GLint height;
@@ -78,6 +108,11 @@ void update(GLFWwindow *window, snake::Snake &snake) {
     snake.move();
 }
 
+/**
+ * @brief Reshape view port in window
+ *
+ * @param window Game window
+ */
 void reshape(GLFWwindow *window) {
     GLint width;
     GLint height;
@@ -99,11 +134,12 @@ void reshape(GLFWwindow *window) {
  * @param window Window where will be rendered stuffs
  * @param snake The snake object
  */
-void render(GLFWwindow *window, snake::Snake &snake, object::Object &base) {
+void render(GLFWwindow *window, snake::Snake &snake, object::Object &base, object::Object &food) {
     glClear(GL_COLOR_BUFFER_BIT);
 
     base.draw();
     snake.draw();
+    food.draw();
 
     glfwSwapBuffers(window);
     glfwPollEvents();
@@ -163,14 +199,16 @@ void run(void) {
 
     while (not glfwWindowShouldClose(window)) {
         snake::Snake snake = snake::Snake(settings::size);
-        object::Object base = object::Object();
 
-        init(snake, base);
+        object::Object base = object::Object();
+        object::Object food = object::Object();
+
+        init(snake, base, food);
 
         while (not glfwWindowShouldClose(window)) {
             reshape(window);
-            update(window, snake);
-            render(window, snake, base);
+            update(window, snake, food);
+            render(window, snake, base, food);
         }
     }
 
