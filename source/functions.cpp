@@ -13,19 +13,24 @@
 #include "../include/snake.hpp"
 
 namespace functions {
-int randomic(int inferior, int superior) {
+int random(int inferior, int superior) {
+    static std::random_device device;
+    static std::mt19937 engine(device());
+
     std::uniform_int_distribution<int> uniform(inferior, superior);
-    std::default_random_engine engine;
 
     return uniform(engine);
 }
 
 void init(snake::Snake &snake, object::Object &base) {
-    int color = randomic(0, 7);
+    int color = random(0, 6);
 
     glClearColor(settings::fore[color][0], settings::fore[color][1], settings::fore[color][2], 1.0);
 
-    snake.set(0.0, 0.0, 2.0 / (GLfloat)settings::unit, 0.9);
+    GLfloat x = 2.0 * random(0, settings::unit - 1) / (GLfloat)settings::unit - 1.0;
+    GLfloat y = 2.0 * random(0, settings::unit - 1) / (GLfloat)settings::unit - 1.0;
+
+    snake.set(x, y, 2.0 / (GLfloat)settings::unit, 0.9);
     base.set(-1.0, 1.0, 2.0, settings::back[color]);
 
     snake.configure();
@@ -108,9 +113,6 @@ void render(GLFWwindow *window, snake::Snake &snake, object::Object &base) {
  * @brief Run the game
  */
 void run(void) {
-    std::random_device device;
-    std::mt19937 generator(device());
-
     if (not glfwInit()) {
         std::cerr << "Error: GLFW did not initialized!";
 
