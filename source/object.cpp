@@ -7,6 +7,7 @@
 
 #include "../include/geometry.hpp"
 #include "../include/object.hpp"
+#include "../include/settings.hpp"
 
 namespace object {
 /**
@@ -22,7 +23,7 @@ Object::Object(void) {}
  * @param step Block side size
  * @param color Object color
  */
-Object::Object(GLfloat x, GLfloat y, GLfloat step, GLfloat color) {
+Object::Object(GLint x, GLint y, GLfloat step, GLfloat color) {
     this->set(x, y, step, color);
     this->configure();
 }
@@ -35,7 +36,7 @@ Object::Object(GLfloat x, GLfloat y, GLfloat step, GLfloat color) {
  * @param step Block side size
  * @param color Object color array
  */
-Object::Object(GLfloat x, GLfloat y, GLfloat step, GLfloat *color) {
+Object::Object(GLint x, GLint y, GLfloat step, GLfloat *color) {
     this->set(x, y, step, color);
     this->configure();
 }
@@ -46,18 +47,17 @@ Object::Object(GLfloat x, GLfloat y, GLfloat step, GLfloat *color) {
  * @param letter [TODO:parameter]
  * @return [TODO:return]
  */
-GLfloat Object::get(GLchar letter) {
-    static GLchar letters[6] = {'x', 'y', 'z', 'r', 'g', 'b'};
-
-    for (int index = 0; index < 6; index++) {
-        if (letter == letters[index]) {
-            return this->data[index];
-        }
+GLint Object::get(GLchar letter) {
+    if (letter == 'x') {
+        return this->x;
+    }
+    if (letter == 'y') {
+        return this->y;
     }
 
     std::cerr << "Attribute absent in ´Object::get(GLchar)´!\n";
 
-    return 0.0;
+    return 0;
 }
 
 /**
@@ -66,7 +66,7 @@ GLfloat Object::get(GLchar letter) {
  * @param x Horizontal position
  * @param y Vertical position
  */
-void Object::set(GLfloat x, GLfloat y) { this->set(x, y, this->step, this->color); }
+void Object::set(GLint x, GLint y) { this->set(x, y, this->step, this->color); }
 
 /**
  * @brief Set object values
@@ -76,8 +76,14 @@ void Object::set(GLfloat x, GLfloat y) { this->set(x, y, this->step, this->color
  * @param step Block side size
  * @param color Object color
  */
-void Object::set(GLfloat x, GLfloat y, GLfloat step, GLfloat color) {
-    this->square.set(x, y, step, color);
+void Object::set(GLint x, GLint y, GLfloat step, GLfloat color) {
+    this->x = x;
+    this->y = y;
+
+    GLfloat dx = (x - 1) * 2.0 / (GLfloat)settings::unit - 1.0;
+    GLfloat dy = 1.0 - (y - 1) * 2.0 / (GLfloat)settings::unit;
+
+    this->square.set(dx, dy, step, color);
 
     for (int index = 0; index < 4; index++) {
         this->data[6 * index + 0] = this->square.vertices[index].x;
@@ -110,8 +116,14 @@ void Object::set(GLfloat x, GLfloat y, GLfloat step, GLfloat color) {
  * @param step Block side size
  * @param color Object color array
  */
-void Object::set(GLfloat x, GLfloat y, GLfloat step, GLfloat *color) {
-    this->square.set(x, y, step, color);
+void Object::set(GLint x, GLint y, GLfloat step, GLfloat *color) {
+    this->x = x;
+    this->y = y;
+
+    GLfloat dx = (x - 1) * 2.0 / (GLfloat)settings::unit - 1.0;
+    GLfloat dy = 1.0 - (y - 1) * 2.0 / (GLfloat)settings::unit;
+
+    this->square.set(dx, dy, step, color);
 
     for (int index = 0; index < 4; index++) {
         this->data[6 * index + 0] = this->square.vertices[index].x;

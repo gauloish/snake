@@ -31,16 +31,19 @@ class Object {
     GLuint fragment;
     GLuint program;
 
+    GLint x;
+    GLint y;
+
    public:
     Object(void);
-    Object(GLfloat, GLfloat, GLfloat, GLfloat);
-    Object(GLfloat, GLfloat, GLfloat, GLfloat *);
+    Object(GLint, GLint, GLfloat, GLfloat);
+    Object(GLint, GLint, GLfloat, GLfloat *);
     ~Object(void);
 
-    GLfloat get(GLchar);
-    void set(GLfloat, GLfloat);
-    void set(GLfloat, GLfloat, GLfloat, GLfloat);
-    void set(GLfloat, GLfloat, GLfloat, GLfloat *);
+    GLint get(GLchar);
+    void set(GLint, GLint);
+    void set(GLint, GLint, GLfloat, GLfloat);
+    void set(GLint, GLint, GLfloat, GLfloat *);
     void configure(void);
     void draw(void);
 };
