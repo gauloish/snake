@@ -25,14 +25,14 @@ Snake::Snake(const GLuint amount) : amount(amount) {}
  * @param letter Value
  * @return Block snake attribute
  */
-GLfloat Snake::get(GLuint index, GLchar letter) {
+GLint Snake::get(GLuint index, GLchar letter) {
     if (index < this->size) {
         return this->body[index].get(letter);
     }
 
     std::cerr << "Index out of range in ´Snake::get(GLuint, GLchar)´!\n";
 
-    return 0.0;
+    return 0;
 }
 
 /**
@@ -44,7 +44,7 @@ GLfloat Snake::get(GLuint index, GLchar letter) {
  * @param color Snake color
  * @param amount Size of snake
  */
-void Snake::set(GLfloat x, GLfloat y, GLfloat step, GLfloat color) {
+void Snake::set(GLint x, GLint y, GLfloat step, GLfloat color) {
     this->step = step;
 
     this->body = std::vector<object::Object>(this->amount);
@@ -65,7 +65,7 @@ void Snake::set(GLfloat x, GLfloat y, GLfloat step, GLfloat color) {
  * @param color Snake color
  * @param amount Size of snake
  */
-void Snake::set(GLfloat x, GLfloat y, GLfloat step, GLfloat *color) {
+void Snake::set(GLint x, GLint y, GLfloat step, GLfloat *color) {
     this->step = step;
 
     this->body = std::vector<object::Object>(this->amount);
@@ -105,12 +105,18 @@ void Snake::draw(void) {
  */
 void Snake::move(void) {
     if (this->counter == 0) {
+        if (this->eat) {
+            this->eat = false;
+
+            this->shift();
+        }
+
         for (int index = this->size - 1; index > 0; index--) {
             this->body[index] = this->body[index - 1];
         }
 
-        this->x += this->step * this->horizontal;
-        this->y += this->step * this->vertical;
+        this->x += this->horizontal;
+        this->y += this->vertical;
 
         this->body[0].set(this->x, this->y);
     }
@@ -128,6 +134,47 @@ void Snake::sense(GLint horizontal, GLint vertical) {
     this->horizontal = horizontal;
     this->vertical = vertical;
 }
+
+/**
+ * @brief Verify collisions and eat food
+ *
+ * @param food Food object
+ * @return State of snake
+ */
+int Snake::verify(object::Object &food) {
+    if (this->size == settings::size) {
+        return 3;
+    }
+    if (this->x < 1 or this->x > settings::unit) {
+        return 2;
+    }
+    if (this->y < 1 or this->y > settings::unit) {
+        return 2;
+    }
+
+    for (int index = 1; index < this->size; index++) {
+        int body_x = this->body[index].get('x');
+        int body_y = this->body[index].get('y');
+
+        if (this->x == body_x and this->y == body_y) {
+            return 2;
+        }
+    }
+
+    if (this->x == food.get('x') and this->y == food.get('y')) {
+        this->eat = true;
+        return 1;
+    }
+
+    return 0;
+}
+
+/**
+ * @brief Snake length
+ *
+ * @return Snake length
+ */
+GLuint Snake::length(void) { return this->size; }
 
 /**
  * @brief Added one more block to snake

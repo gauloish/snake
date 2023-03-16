@@ -26,21 +26,24 @@ class Snake {
     GLint horizontal{0};
     GLint vertical{0};
 
-    GLfloat x;
-    GLfloat y;
+    GLint x;
+    GLint y;
 
     GLfloat step;
+    GLboolean eat;
 
    public:
     Snake(const GLuint);
 
-    GLfloat get(GLuint, GLchar);
-    void set(GLfloat, GLfloat, GLfloat, GLfloat);
-    void set(GLfloat, GLfloat, GLfloat, GLfloat *);
+    GLint get(GLuint, GLchar);
+    void set(GLint, GLint, GLfloat, GLfloat);
+    void set(GLint, GLint, GLfloat, GLfloat *);
     void configure(void);
     void draw(void);
     void move(void);
     void sense(GLint, GLint);
+    GLint verify(object::Object &);
+    GLuint length(void);
     void shift(void);
 };
 }  // namespace snake
