@@ -40,18 +40,20 @@ void init(snake::Snake &snake, object::Object &base, object::Object &food) {
 
     glClearColor(settings::fore[color][0], settings::fore[color][1], settings::fore[color][2], 1.0);
 
-    GLfloat snake_x = 2.0 * random(0, settings::unit - 1) / (GLfloat)settings::unit - 1.0;
-    GLfloat snake_y = 2.0 * random(0, settings::unit - 1) / (GLfloat)settings::unit - 1.0;
+    GLint snake_x = random(1, settings::unit);
+    GLint snake_y = random(1, settings::unit);
 
-    snake.set(snake_x, snake_y, 2.0 / (GLfloat)settings::unit, 0.9);
-    base.set(-1.0, 1.0, 2.0, settings::back[color]);
+    GLfloat step = 2.0 / (GLfloat)settings::unit;
+
+    snake.set(snake_x, snake_y, step, 0.9);
+    base.set(1, 1, 2.0, settings::back[color]);
 
     while (true) {
-        GLfloat food_x = 2.0 * random(0, settings::unit - 1) / (GLfloat)settings::unit - 1.0;
-        GLfloat food_y = 2.0 * random(0, settings::unit - 1) / (GLfloat)settings::unit - 1.0;
+        GLint food_x = random(1, settings::unit);
+        GLint food_y = random(1, settings::unit);
 
         if (food_x != snake_x and food_y != snake_y) {
-            food.set(food_x, food_y, 2.0 / (GLfloat)settings::unit, settings::fore[color][0]);
+            food.set(food_x, food_y, step, settings::fore[color]);
 
             break;
         }
@@ -62,21 +64,44 @@ void init(snake::Snake &snake, object::Object &base, object::Object &food) {
     food.configure();
 }
 
-/**
- * @brief Centralize window in screen
- *
- * @param window Game window
- */
-void centralize(GLFWwindow *window) {
-    GLint width;
-    GLint height;
+bool verify(snake::Snake &snake, object::Object &food) {
+    bool value = false;
 
-    glfwGetFramebufferSize(window, &width, &height);
+    switch (snake.verify(food)) {
+        case 0:  // Nothing happened
+            break;
+        case 1:  // The snake ate
+            while (true) {
+                GLint food_x = random(1, settings::unit);
+                GLint food_y = random(1, settings::unit);
 
-    GLFWmonitor *monitor = glfwGetPrimaryMonitor();
-    const GLFWvidmode *mode = glfwGetVideoMode(monitor);
+                bool out = false;
 
-    glfwSetWindowPos(window, (mode->width - width) / 2, (mode->height - height) / 2);
+                for (int index = 0; index < snake.length(); index++) {
+                    GLfloat snake_x = snake.get(index, 'x');
+                    GLfloat snake_y = snake.get(index, 'y');
+
+                    if (food_x != snake_x and food_y != snake_y) {
+                        out = true;
+                        break;
+                    }
+                }
+
+                if (out) {
+                    food.set(food_x, food_y);
+                    break;
+                }
+            }
+            break;
+        case 2:  // The snake died
+            value = true;
+            break;
+        case 3:  // Victory
+            value = true;
+            break;
+    }
+
+    return value;
 }
 
 /**
@@ -93,7 +118,7 @@ void update(GLFWwindow *window, snake::Snake &snake) {
         {GLFW_KEY_UP, GLFW_KEY_K, GLFW_KEY_W},     // Right
     };
 
-    GLint senses[4][2] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+    GLint senses[4][2] = {{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
 
     for (int sense = 0; sense < 4; sense++) {
         for (int key = 0; key < 3; key++) {
@@ -106,6 +131,23 @@ void update(GLFWwindow *window, snake::Snake &snake) {
     }
 
     snake.move();
+}
+
+/**
+ * @brief Render the game scene and your all stuffs
+ *
+ * @param window Window where will be rendered stuffs
+ * @param snake The snake object
+ */
+void render(GLFWwindow *window, snake::Snake &snake, object::Object &base, object::Object &food) {
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    base.draw();
+    food.draw();
+    snake.draw();
+
+    glfwSwapBuffers(window);
+    glfwPollEvents();
 }
 
 /**
@@ -129,20 +171,20 @@ void reshape(GLFWwindow *window) {
 }
 
 /**
- * @brief Render the game scene and your all stuffs
+ * @brief Centralize window in screen
  *
- * @param window Window where will be rendered stuffs
- * @param snake The snake object
+ * @param window Game window
  */
-void render(GLFWwindow *window, snake::Snake &snake, object::Object &base, object::Object &food) {
-    glClear(GL_COLOR_BUFFER_BIT);
+void centralize(GLFWwindow *window) {
+    GLint width;
+    GLint height;
 
-    base.draw();
-    snake.draw();
-    food.draw();
+    glfwGetFramebufferSize(window, &width, &height);
 
-    glfwSwapBuffers(window);
-    glfwPollEvents();
+    GLFWmonitor *monitor = glfwGetPrimaryMonitor();
+    const GLFWvidmode *mode = glfwGetVideoMode(monitor);
+
+    glfwSetWindowPos(window, (mode->width - width) / 2, (mode->height - height) / 2);
 }
 
 /**
@@ -207,7 +249,12 @@ void run(void) {
 
         while (not glfwWindowShouldClose(window)) {
             reshape(window);
-            update(window, snake, food);
+            update(window, snake);
+
+            if (verify(snake, food)) {
+                break;
+            }
+
             render(window, snake, base, food);
         }
     }
