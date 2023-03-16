@@ -9,7 +9,8 @@ namespace settings {
 extern const GLuint unit;
 extern const GLuint size;
 
-extern const GLuint rate;
+extern GLuint rate;
+extern GLuint state;
 
 extern GLint width;
 extern GLint height;
