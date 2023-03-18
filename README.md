@@ -10,9 +10,9 @@ A Simple Snake Game
 
 **OpenGL**: 4.2 or Latest
 
-**GLFW**: GLFW Dependencies in [link](https://www.glfw.org/docs/latest/compile.html)
+**GLFW**: GLFW Dependencies in this [link](https://www.glfw.org/docs/latest/compile.html)
 
-**GLEW**: GLEW Dependencies in [link](https://glew.sourceforge.net/build.html)
+**GLEW**: GLEW Dependencies in this [link](https://glew.sourceforge.net/build.html)
 
 ## Compiling
 
