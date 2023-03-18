@@ -1,13 +1,9 @@
-#define GLEW_STATIC
-
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-
 #include <iostream>
 #include <random>
 
 #include "../include/functions.hpp"
 #include "../include/geometry.hpp"
+#include "../include/glibs.hpp"
 #include "../include/object.hpp"
 #include "../include/settings.hpp"
 #include "../include/snake.hpp"
@@ -64,6 +60,13 @@ void init(snake::Snake &snake, object::Object &base, object::Object &food) {
     food.configure();
 }
 
+/**
+ * @brief Verify snake collisions and eating
+ *
+ * @param snake Snake
+ * @param food Food
+ * @return State snake
+ */
 bool verify(snake::Snake &snake, object::Object &food) {
     bool value = false;
 
@@ -128,6 +131,14 @@ void update(GLFWwindow *window, snake::Snake &snake) {
                 snake.sense(senses[sense][0], senses[sense][1]);
             }
         }
+    }
+
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+        settings::state = 2;
+    } else if (glfwGetKey(window, GLFW_KEY_ENTER) == GLFW_PRESS) {
+        settings::state = 1;
+    } else {
+        settings::state = 0;
     }
 
     snake.move();
@@ -247,18 +258,29 @@ void run(void) {
 
         init(snake, base, food);
 
+        while (settings::state) {
+            reshape(window);
+            update(window, snake);
+            render(window, snake, base, food);
+        }
+
         while (not glfwWindowShouldClose(window)) {
             reshape(window);
             update(window, snake);
 
-            if (verify(snake, food)) {
+            if (verify(snake, food) or settings::state) {
                 break;
             }
 
             render(window, snake, base, food);
         }
+
+        if (settings::state == 2) {
+            break;
+        }
     }
 
+    glfwDestroyWindow(window);
     glfwTerminate();
 }
 }  // namespace functions
