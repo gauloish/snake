@@ -1,9 +1,5 @@
-#define GLEW_STATIC
-
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-
-#include "../include/geometry.hpp"
+#include "geometry.hpp"
+#include "glibs.hpp"
 
 #ifndef OBJECT_HPP
 #define OBJECT_HPP

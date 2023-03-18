@@ -1,10 +1,6 @@
-#define GLEW_STATIC
-
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-
-#include "../include/object.hpp"
-#include "../include/snake.hpp"
+#include "glibs.hpp"
+#include "object.hpp"
+#include "snake.hpp"
 
 #ifndef FUNCTIONS_HPP
 #define FUNCTIONS_HPP

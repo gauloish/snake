@@ -1,8 +1,6 @@
-#define GLEW_STATIC
-
-#include <GL/glew.h>
-
 #include <vector>
+
+#include "glibs.hpp"
 
 #ifndef POINT_HPP
 #define POINT_HPP

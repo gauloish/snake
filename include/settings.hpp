@@ -1,6 +1,4 @@
-#define GLEW_STATIC
-
-#include <GL/glew.h>
+#include "glibs.hpp"
 
 #ifndef SETTINGS_HPP
 #define SETTINGS_HPP
