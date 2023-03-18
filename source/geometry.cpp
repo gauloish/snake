@@ -1,10 +1,7 @@
-#define GLEW_STATIC
-
-#include <GL/glew.h>
-
 #include <algorithm>
 
 #include "../include/geometry.hpp"
+#include "../include/glibs.hpp"
 
 namespace geometry {
 /**

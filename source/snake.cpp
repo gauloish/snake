@@ -1,11 +1,8 @@
-#define GLEW_STATIC
-
-#include <GL/glew.h>
-
 #include <algorithm>
 #include <iostream>
 #include <vector>
 
+#include "../include/glibs.hpp"
 #include "../include/object.hpp"
 #include "../include/settings.hpp"
 #include "../include/snake.hpp"

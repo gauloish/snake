@@ -1,8 +1,5 @@
-#define GLEW_STATIC
-
-#include <GL/glew.h>
-
 #include "../include/settings.hpp"
+#include "../include/glibs.hpp"
 
 namespace settings {
 const GLuint unit = 25;

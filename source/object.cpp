@@ -1,11 +1,7 @@
-#define GLEW_STATIC
-
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-
 #include <iostream>
 
 #include "../include/geometry.hpp"
+#include "../include/glibs.hpp"
 #include "../include/object.hpp"
 #include "../include/settings.hpp"
 
