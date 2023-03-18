@@ -1,21 +1,30 @@
-cmake_minimum_required( VERSION 3.26 )
+cmake_minimum_required(VERSION 3.26)
 
-project( Snake )
+project(Snake)
 
-find_package( glfw3 REQUIRED )
-find_package( GLEW REQUIRED )
-find_package( OpenGL REQUIRED )
+set (CMAKE_CXX_STANDARD 11)
 
-if( WIN32 )
-    SET( CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup" )
+# GLFW
+set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
+set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+
+add_subdirectory(libraries/glfw)
+
+# GLEW
+set(glew-cmake_BUILD_SHARED OFF)
+
+add_subdirectory(libraries/glew)
+
+# OpenGL
+find_package(OpenGL REQUIRED)
+
+# System
+if(APPLE)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
 endif()
-if( UNIX )
-    SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17" )
-endif()
-if( APPLE )
-    SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++" )
-endif()
 
+# Setup
 set (
 	SOURCES
 	source/main.cpp
@@ -26,5 +35,5 @@ set (
 	source/object.cpp
 	)
 
-add_executable( snake ${SOURCES} )
-target_link_libraries( snake glfw GLEW::GLEW OpenGL::GL )
+add_executable(snake ${SOURCES})
+target_link_libraries(snake glfw libglew_static OpenGL::GL)
