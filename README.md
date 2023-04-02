@@ -3,8 +3,9 @@
 A Simple Snake Game
 
 <div align="center">
-  <video src="https://user-images.githubusercontent.com/125079293/229370244-cc21a9ed-68d0-44fb-8874-6c8e9ffadacc.mov"/>
+  <video src="https://user-images.githubusercontent.com/125079293/229371004-6349e8eb-24fa-4761-abed-86bdbac1b886.mp4"/>
 </div>
+
 
 ## Requirements
 
