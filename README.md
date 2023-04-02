@@ -2,6 +2,10 @@
 
 A Simple Snake Game
 
+<p align="center">
+  <img src="https://github.com/gauloish/snake/blob/main/assets/snake.gif"/>
+</p>
+
 ## Requirements
 
 **C++**: 11 or Latest
