@@ -6,6 +6,10 @@ A Simple Snake Game
   <video src="https://user-images.githubusercontent.com/125079293/229371509-5dedbde9-0c36-4c02-812b-d836e0925991.mp4"/>
 </div>
 
+<div align="center">
+  <video src="https://github.com/gauloish/snake/blob/main/assets/snake.gif"/>
+</div>
+
 ## Requirements
 
 **C++**: 11 or Latest
