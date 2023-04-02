@@ -6,6 +6,8 @@ A Simple Snake Game
   <img src="https://github.com/gauloish/snake/blob/main/assets/snake.gif"/>
 </p>
 
+https://user-images.githubusercontent.com/125079293/229370064-f8e76481-e024-44f3-91ce-a9b53fe561e3.mov
+
 ## Requirements
 
 **C++**: 11 or Latest
