@@ -7,7 +7,7 @@ A Simple Snake Game
 </div>
 
 <div align="center">
-  <video src="https://github.com/gauloish/snake/blob/main/assets/snake.gif"/>
+  <img src="https://github.com/gauloish/snake/blob/main/assets/snake.gif"/>
 </div>
 
 ## Requirements
