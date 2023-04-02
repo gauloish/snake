@@ -2,9 +2,9 @@
 
 A Simple Snake Game
 
-<p align="center">
-  <video src="https://user-images.githubusercontent.com/125079293/229370244-cc21a9ed-68d0-44fb-8874-6c8e9ffadacc.mov"/>
-</p>
+<video>
+  <source src="https://user-images.githubusercontent.com/125079293/229370244-cc21a9ed-68d0-44fb-8874-6c8e9ffadacc.mov" type="video/mp4">
+</video>
 
 ## Requirements
 
