@@ -3,11 +3,7 @@
 A Simple Snake Game
 
 <div align="center">
-  <video src="https://user-images.githubusercontent.com/125079293/229371509-5dedbde9-0c36-4c02-812b-d836e0925991.mp4"/>
-</div>
-
-<div align="center">
-  <img src="https://github.com/gauloish/snake/blob/main/assets/snake.gif"/>
+  <img src="https://user-images.githubusercontent.com/125079293/229385724-fe61410a-05cc-4e25-8957-e5384a2a715f.gif"/>
 </div>
 
 ## Requirements
